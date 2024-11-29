@@ -25,6 +25,9 @@ public class Login extends JPanel implements ActionListener {
         logiPanel.add(password);
 
         add(logiPanel);
+
+        add(loginButton);
+        loginButton.addActionListener(this::actionPerformed);
     }
 
     public String getUsername() {
