@@ -4,7 +4,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends JPanel implements ActionListener {
-    private JTextField username;
-    private JPasswordField password;
+    private final JTextField username = new JTextField();
+    private final JPasswordField password = new JPasswordField();
+
+
 }
 
