@@ -37,15 +37,15 @@ public class Connect {
         }
     
 
-        private static String getUrl (String database) {
+        public static String getUrl (String database) {
             return "jdbc:mysql://localhost:3306/" + database;
         }
     
-        private static String getUrl (int port, String database) {
+        public static String getUrl (int port, String database) {
             return "jdbc:mysql://localhost:"+port+"/" + database;
         }
     
-        private static String getUrl (String address, int port, String database) {
+        public static String getUrl (String address, int port, String database) {
             return "jdbc:mysql://"+address+":"+port+"/" + database;
         }
     
