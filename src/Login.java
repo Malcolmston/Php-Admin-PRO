@@ -18,13 +18,15 @@ import javax.swing.border.EmptyBorder;
 
 public class Login extends JPanel implements ActionListener {
     private final JTextField usernameField;
+    private final JTextField databaseField;
     private final JPasswordField passwordField;
     private final JButton loginButton;
     private final JLabel titleLabel;
     private final JLabel usernameLabel;
+    private final JLabel databaseLabel;
     private final JLabel passwordLabel;
     private final JPanel formPanel;
-
+    
     public Login() {
         // Set overall layout
         setLayout(new BorderLayout(10, 10));
@@ -58,18 +60,33 @@ public class Login extends JPanel implements ActionListener {
         gbc.gridwidth = 2;
         formPanel.add(usernameField, gbc);
 
+        // Database Label and Field
+        databaseLabel = new JLabel("Database:");
+        databaseLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        formPanel.add(databaseLabel, gbc);
+
+        databaseField = new JTextField(20);
+        databaseField.setFont(new Font("Arial", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        formPanel.add(databaseField, gbc);
+
         // Password Label and Field
         passwordLabel = new JLabel("Password:");
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 4;
         gbc.gridwidth = 1;
         formPanel.add(passwordLabel, gbc);
 
         passwordField = new JPasswordField(20);
         passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         gbc.gridwidth = 2;
         formPanel.add(passwordField, gbc);
 
@@ -80,13 +97,13 @@ public class Login extends JPanel implements ActionListener {
         loginButton.setForeground(new Color(70,70,70));
         loginButton.setFocusPainted(false);
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(10, 5, 5, 5);
         formPanel.add(loginButton, gbc);
 
         // Add action listener
-        loginButton.addActionListener(this::actionPerformed);
+        loginButton.addActionListener(this);
 
         // Add form panel to main panel
         add(formPanel, BorderLayout.CENTER);
@@ -95,6 +112,7 @@ public class Login extends JPanel implements ActionListener {
     public void clear() {
         usernameField.setText("");
         passwordField.setText("");
+        databaseField.setText("");
     }
 
     public String getUsername() {
@@ -105,12 +123,17 @@ public class Login extends JPanel implements ActionListener {
         return new String(passwordField.getPassword());
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Username: " + getUsername());
-        System.out.println("Password: " + getPassword());
+    public String getDatabaseName() {
+        return databaseField.getText();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Get login credentials
+        String username = getUsername();
+        String password = getPassword();
+        String database = getDatabaseName();
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
