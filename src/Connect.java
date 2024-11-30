@@ -23,7 +23,7 @@ public class Connect {
         }
     
     
-        private static boolean isConnected (String database, String username, String password) {
+        public static boolean isConnected (String database, String username, String password) {
             try (Connection connection = getConnection( getUrl(database), username, password)) {            
                 // Example of a simple query (optional)
                 String testQuery = "SELECT 1";
@@ -41,7 +41,7 @@ public class Connect {
             return false;
         }
     
-        private static boolean isConnected (int port, String database, String username, String password) {
+        public static boolean isConnected (int port, String database, String username, String password) {
             try (Connection connection = getConnection( getUrl(port, database), username, password)) {            
                 // Example of a simple query (optional)
                 String testQuery = "SELECT 1";
@@ -59,7 +59,7 @@ public class Connect {
             return false;
         }
     
-        private static boolean isConnected (String address, int port, String database, String username, String password) {
+        public static boolean isConnected (String address, int port, String database, String username, String password) {
             try (Connection connection = getConnection( getUrl(address, port, database), username, password)) {            
                 // Example of a simple query (optional)
                 String testQuery = "SELECT 1";
