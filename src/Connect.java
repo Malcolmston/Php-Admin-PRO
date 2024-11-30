@@ -23,58 +23,28 @@ public class Connect {
         }
     
     
-        public static boolean isConnected (String database, String username, String password) {
-            try (Connection connection = getConnection( getUrl(database), username, password)) {            
-                // Example of a simple query (optional)
-                String testQuery = "SELECT 1";
-                try (PreparedStatement stmt = connection.prepareStatement(testQuery);
-                     ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                       return true;
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println( e.getMessage());
-                return false;
+        public static boolean isConnected(String database, String username, String password) throws SQLException {
+            try (Connection connection = getConnection(getUrl(database), username, password);
+                 PreparedStatement stmt = connection.prepareStatement("SELECT 1");
+                 ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
-    
-            return false;
         }
     
-        public static boolean isConnected (int port, String database, String username, String password) {
-            try (Connection connection = getConnection( getUrl(port, database), username, password)) {            
-                // Example of a simple query (optional)
-                String testQuery = "SELECT 1";
-                try (PreparedStatement stmt = connection.prepareStatement(testQuery);
-                     ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                       return true;
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println( e.getMessage());
-                return false;
+        public static boolean isConnected(int port, String database, String username, String password) throws SQLException {
+            try (Connection connection = getConnection(getUrl(port, database), username, password);
+                 PreparedStatement stmt = connection.prepareStatement("SELECT 1");
+                 ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
-    
-            return false;
         }
     
-        public static boolean isConnected (String address, int port, String database, String username, String password) {
-            try (Connection connection = getConnection( getUrl(address, port, database), username, password)) {            
-                // Example of a simple query (optional)
-                String testQuery = "SELECT 1";
-                try (PreparedStatement stmt = connection.prepareStatement(testQuery);
-                     ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                       return true;
-                    }
-                }
-            } catch (SQLException e) {
-                System.err.println( e.getMessage());
-                return false;
+        public static boolean isConnected(String address, int port, String database, String username, String password) throws SQLException {
+            try (Connection connection = getConnection(getUrl(address, port, database), username, password);
+                 PreparedStatement stmt = connection.prepareStatement("SELECT 1");
+                 ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
-    
-            return false;
         }
     
      public static String getErrorType(SQLException e) {
