@@ -10,6 +10,11 @@ public class Connect {
             return DriverManager.getConnection(url, username, password);
         }
     
+        private static String getUrl () {
+            return "jdbc:mysql://localhost:3306";
+        }
+    
+
         private static String getUrl (String database) {
             return "jdbc:mysql://localhost:3306/" + database;
         }
@@ -23,6 +28,14 @@ public class Connect {
         }
     
     
+        public static boolean isConnected( String username, String password) throws SQLException {
+            try (Connection connection = getConnection(getUrl(), username, password);
+                 PreparedStatement stmt = connection.prepareStatement("SELECT 1");
+                 ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        }
+
         public static boolean isConnected(String database, String username, String password) throws SQLException {
             try (Connection connection = getConnection(getUrl(database), username, password);
                  PreparedStatement stmt = connection.prepareStatement("SELECT 1");
