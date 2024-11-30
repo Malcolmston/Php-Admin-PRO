@@ -53,6 +53,8 @@ public class Connect {
         switch (e.getErrorCode()) {
             case 0:
                 return "General Error";
+            case 1044:
+                return "Access Denied (Invalid Hostname)";
             case 1045:
                 return "Access Denied (Invalid Credentials)";
             case 1049:
