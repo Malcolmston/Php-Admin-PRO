@@ -8,7 +8,7 @@ public class Connect {
     private String url;
     private String username;
     private String password;
-    private Connection connection;
+    protected Connection connection;
 
 
     public Connect(String url, String username, String password) {
@@ -47,7 +47,7 @@ public class Connect {
     public String getPassword() {
         return password;
     }
-    
+
     public static String getUrl(String database) {
         return "jdbc:mysql://localhost:3306/" + database;
     }
