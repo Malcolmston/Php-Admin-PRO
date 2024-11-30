@@ -105,7 +105,7 @@ public class Login extends JPanel implements ActionListener {
         formPanel.add(loginButton, gbc);
 
         // Add action listener
-        loginButton.addActionListener(this);
+        loginButton.addActionListener(this::actionPerformed);
 
         // Add form panel to main panel
         add(formPanel, BorderLayout.CENTER);
