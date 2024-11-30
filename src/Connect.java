@@ -26,6 +26,10 @@ public class Connect {
         this(url, username, "");
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
 
         // Method to establish database connection
         public static Connection getConnection(String url, String username, String password) throws SQLException {
