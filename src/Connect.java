@@ -72,7 +72,7 @@ public class Connect {
             case 1451:
                 return "Foreign Key Constraint Failure";
             default:
-                return "Unclassified SQL Error (Code: " + e.getErrorCode() + ")";
+                return e.getMessage() + " (Code: " + e.getErrorCode() + ")";
         }
     }    
 }
