@@ -30,39 +30,37 @@ public class Connect {
         return connection;
     }
 
+    // Method to establish database connection
+    public static Connection getConnection(String url, String username, String password) throws SQLException {
+        return DriverManager.getConnection(url, username, password);
+    }
 
-        // Method to establish database connection
-        public static Connection getConnection(String url, String username, String password) throws SQLException {
-            return DriverManager.getConnection(url, username, password);
-        }
-    
-        private static String getUrl () {
-            return "jdbc:mysql://localhost:3306";
-        }
-    
+    private static String getUrl() {
+        return "jdbc:mysql://localhost:3306";
+    }
 
-        public static String getUrl (String database) {
-            return "jdbc:mysql://localhost:3306/" + database;
-        }
-    
-        public static String getUrl (int port, String database) {
-            return "jdbc:mysql://localhost:"+port+"/" + database;
-        }
-    
-        public static String getUrl (String address, int port, String database) {
-            return "jdbc:mysql://"+address+":"+port+"/" + database;
-        }
-    
-    
-        public static boolean isConnected(Connection connection) throws SQLException {
-            try (PreparedStatement stmt = connection.prepareStatement("SELECT 1");
-                 ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
-            }
-        }
+    public static String getUrl(String database) {
+        return "jdbc:mysql://localhost:3306/" + database;
+    }
 
-     public static String getErrorType(SQLException e) {
-        if (e == null) return "Unknown Error";
+    public static String getUrl(int port, String database) {
+        return "jdbc:mysql://localhost:" + port + "/" + database;
+    }
+
+    public static String getUrl(String address, int port, String database) {
+        return "jdbc:mysql://" + address + ":" + port + "/" + database;
+    }
+
+    public static boolean isConnected(Connection connection) throws SQLException {
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT 1");
+                ResultSet rs = stmt.executeQuery()) {
+            return rs.next();
+        }
+    }
+
+    public static String getErrorType(SQLException e) {
+        if (e == null)
+            return "Unknown Error";
 
         switch (e.getErrorCode()) {
             case 0:
@@ -88,5 +86,5 @@ public class Connect {
             default:
                 return e.getMessage() + " (Code: " + e.getErrorCode() + ")";
         }
-    }    
+    }
 }
