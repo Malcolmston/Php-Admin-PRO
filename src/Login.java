@@ -6,9 +6,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -133,6 +135,29 @@ public class Login extends JPanel implements ActionListener {
         String username = getUsername();
         String password = getPassword();
         String database = getDatabaseName();
+
+        try {
+            // Use Connect class to check connection
+            boolean connected = Connect.isConnected(database, username, password);
+            
+            if (connected) {
+                JOptionPane.showMessageDialog(this, 
+                    "Login Successful!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                // Here you can open the main application window
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Login Failed", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Connection Error: " + Connect.getErrorType(ex), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void main(String[] args) {
