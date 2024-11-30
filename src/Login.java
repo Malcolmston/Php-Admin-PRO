@@ -62,35 +62,37 @@ public class Login extends JPanel implements ActionListener {
         gbc.gridwidth = 2;
         formPanel.add(usernameField, gbc);
 
-        // Database Label and Field
-        databaseLabel = new JLabel("Database:");
-        databaseLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        formPanel.add(databaseLabel, gbc);
-
-        databaseField = new JTextField(20);
-        databaseField.setFont(new Font("Arial", Font.PLAIN, 14));
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
-        formPanel.add(databaseField, gbc);
 
         // Password Label and Field
         passwordLabel = new JLabel("Password:");
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 2;
         gbc.gridwidth = 1;
         formPanel.add(passwordLabel, gbc);
 
         passwordField = new JPasswordField(20);
         passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         formPanel.add(passwordField, gbc);
+
+
+        // Database Label and Field
+        databaseLabel = new JLabel("Database:");
+        databaseLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        formPanel.add(databaseLabel, gbc);
+
+        databaseField = new JTextField(20);
+        databaseField.setFont(new Font("Arial", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        formPanel.add(databaseField, gbc);
 
         // Login Button
         loginButton = new JButton("Sign In");
@@ -137,8 +139,14 @@ public class Login extends JPanel implements ActionListener {
         String database = getDatabaseName();
 
         try {
+            boolean connected;
             // Use Connect class to check connection
-            boolean connected = Connect.isConnected(database, username, password);
+            if ( database.isEmpty() ) {
+                connected = Connect.isConnected(username, password);
+            } else {
+                connected = Connect.isConnected(database, username, password);
+            }
+            
             
             if (connected) {
                 JOptionPane.showMessageDialog(this, 
