@@ -28,6 +28,8 @@ public class Login extends JPanel implements ActionListener {
     private final JLabel databaseLabel;
     private final JLabel passwordLabel;
     private final JPanel formPanel;
+
+    private Connect connect;
     
     public Login() {
         // Set overall layout
@@ -138,16 +140,12 @@ public class Login extends JPanel implements ActionListener {
         String password = getPassword();
         String database = getDatabaseName();
 
+        connect = new Connect(Connect.getUrl(database), username, password);
+
         try {
-            boolean connected;
+            boolean connected = Connect.isConnected(connect.getConnection());
             // Use Connect class to check connection
-            if ( database.isEmpty() ) {
-                connected = Connect.isConnected(username, password);
-            } else {
-                connected = Connect.isConnected(database, username, password);
-            }
-            
-            
+           
             if (connected) {
                 JOptionPane.showMessageDialog(this, 
                     "Login Successful!", 
