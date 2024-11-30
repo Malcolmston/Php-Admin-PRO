@@ -10,6 +10,7 @@ public class Connect {
     private String password;
     private Connection connection;
 
+
     public Connect(String url, String username, String password) {
         this.url = url;
         this.username = username;
@@ -35,10 +36,18 @@ public class Connect {
         return DriverManager.getConnection(url, username, password);
     }
 
-    private static String getUrl() {
+    public static String getUrl() {
         return "jdbc:mysql://localhost:3306";
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
     public static String getUrl(String database) {
         return "jdbc:mysql://localhost:3306/" + database;
     }
