@@ -74,7 +74,7 @@ public class Info {
         return tables;
     }
 
-    private ArrayList<String> getYourTables() {
+    public  ArrayList<String> getYourTables() {
         return yours;
     }
 }
