@@ -5,14 +5,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
-    private final ImageIcon databaseIcon;
+    private final ImageIcon databaseIcon = new ImageIcon("s_db.png");
     private final ImageIcon functionsIcon = new ImageIcon("b_routines.png");
     private final ImageIcon viewsIcon = new ImageIcon("b_browse.png");
     private final ImageIcon tablesIcon = new ImageIcon("s_views.png");
-
-    public CustomTreeCellRenderer(ImageIcon databaseIcon) {
-        this.databaseIcon = databaseIcon;
-    }
+    private final ImageIcon addTableIcon = new ImageIcon("b_newdb.png");
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
@@ -36,6 +33,9 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
                     break;
                 case "Tables":
                     setIcon(tablesIcon);
+                    break;
+                case "Add Table":
+                    setIcon(addTableIcon);
                     break;
                 default:
                     setIcon(databaseIcon); // Default icon for other nodes
