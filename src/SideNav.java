@@ -3,6 +3,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class SideNav extends JPanel {
@@ -37,6 +39,24 @@ public class SideNav extends JPanel {
 
         tree.setShowsRootHandles(true);
         tree.setRootVisible(false);
+
+        tree.addTreeExpansionListener(new TreeExpansionListener() {
+            @Override
+            public void treeExpanded(TreeExpansionEvent event) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) event.getPath().getLastPathComponent();
+
+                if( node.getFirstChild().toString().trim().equals("") ) {
+                    tree.collapsePath(event.getPath());
+                }
+                // Perform your desired action here
+            }
+
+            @Override
+            public void treeCollapsed(TreeExpansionEvent event) {
+                // Optional: Handle node collapse if needed
+            }
+        });
+
 
         tree.setCellRenderer(new CustomTreeCellRenderer(databaseImageIcon));
 
