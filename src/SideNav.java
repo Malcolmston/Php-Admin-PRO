@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeExpansionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
-public class SideNav extends JPanel {
+public class SideNav extends JTree implements TreeExpansionListener {
     private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
     private ImageIcon databaseImageIcon = new ImageIcon("s_db.png");
 
@@ -33,35 +33,33 @@ public class SideNav extends JPanel {
             }
             root.add(table);
         });
-        
-        JTree tree = new JTree(root);
-        
+    
 
-        tree.setShowsRootHandles(true);
-        tree.setRootVisible(false);
-
-        tree.addTreeExpansionListener(new TreeExpansionListener() {
-            @Override
-            public void treeExpanded(TreeExpansionEvent event) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) event.getPath().getLastPathComponent();
-
-                if( node.getFirstChild().toString().trim().equals("") ) {
-                    tree.collapsePath(event.getPath());
-                }
-                // Perform your desired action here
-            }
-
-            @Override
-            public void treeCollapsed(TreeExpansionEvent event) {
-                // Optional: Handle node collapse if needed
-            }
-        });
+        setModel(new DefaultTreeModel(root));
 
 
-        tree.setCellRenderer(new CustomTreeCellRenderer(databaseImageIcon));
+        setShowsRootHandles(true);
+        setRootVisible(false);
 
-        add(tree);
+        addTreeExpansionListener(this);
+
+
+        setCellRenderer(new CustomTreeCellRenderer(databaseImageIcon));
     }
+    
+
+    @Override
+    public void treeExpanded(TreeExpansionEvent event) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) event.getPath().getLastPathComponent();
+
+        if( node.getFirstChild().toString().trim().equals("") ) {
+            collapsePath(event.getPath());
+        }
+        // Perform your desired action here
+    }
+
+    @Override
+    public void treeCollapsed(TreeExpansionEvent event) {}
     
     public static void main(String[] args) {
         JFrame frame = new JFrame("Database Information");
@@ -81,4 +79,7 @@ public class SideNav extends JPanel {
         frame.pack();
         frame.setLocationRelativeTo(null);
     }
+
+
+
 }
