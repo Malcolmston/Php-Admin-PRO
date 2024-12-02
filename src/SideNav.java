@@ -9,7 +9,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 public class SideNav extends JTree implements TreeExpansionListener {
     private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
-    private ImageIcon databaseImageIcon = new ImageIcon("s_db.png");
+    private final ImageIcon databaseImageIcon = new ImageIcon("s_db.png");
 
 
     public SideNav(ArrayList<String> information_schema, ArrayList<String> performance, ArrayList<String> tables) {
